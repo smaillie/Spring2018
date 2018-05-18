@@ -1,6 +1,8 @@
-#Samantha Maillie
+#Samantha Maillie and Ariel Sim 
 #Homework 4 Problem 1
 
+
+# Dart Board Method
 #a true answer = 1/3
 
 fa <-function(x){
@@ -10,7 +12,7 @@ fa <-function(x){
 plot(fa, main = "Function A Plot")
 
 count = 0
-n = 100
+n = 999
 for (i in 1:n){
   x = runif(1,0,1)
   y = runif(1,0,1)
@@ -71,7 +73,7 @@ plot(fc, main = "Function C Plot",
      ylim = c(0,2))
 
 count = 0
-n = 1000
+n = 999
 for (i in 1:n){
   x = runif(1,0,3)
   y = runif(1,0,2)
