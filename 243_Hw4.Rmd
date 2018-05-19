@@ -25,10 +25,15 @@ The clear selection of v is .1 Both .1 and 1 do decent jobs of calculating the t
 
 ##Problem 4
 
-#a
-
 
 ##Problem 5
+
+#b
+
+#c 
+
+The 95% confidence intervals can be constructed using the 2.5 and 97.5 quantiles. It is clear from the plotted histogram that the method is estimating p and $\lambda$ very well. It is not a surprise that both confidence intervals contain what we know to be the true value. The true value of p is .3 with a calculated 95% confidence interval of (.2404, .4921). The true value of $\lambda$ is 2 with a calculated 95% confidence interval of (1.047, 2.116). 
+
 
 ##Problem 6
 
