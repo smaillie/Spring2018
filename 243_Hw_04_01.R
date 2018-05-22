@@ -84,3 +84,14 @@ for (i in 1:n){
 prob = count / n
 estimate = prob* (3*2)
 estimate
+
+
+## Alternative code for problem 1(b)
+# generate x from uniform (-2,2)
+# generate y from uniform(0,1)
+n = 998
+y = runif(n)
+x = runif(n, min = -2, max = 2)
+H = 4*(x^2)*cos(x*y)
+I = sum(H)/n
+I
