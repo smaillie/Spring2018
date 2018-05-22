@@ -2,7 +2,9 @@
 title: "STA 243 Homework 4"
 author: "Ariel Sim (50% of work) Samantha Maillie (50% of work)"
 date: "5/14/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +26,21 @@ The clear selection of v is .1 Both .1 and 1 do decent jobs of calculating the t
 ##Problem 3
 
 ##Problem 4
+(a) The model is then $y_{ij} = \mu_i + \epsilon_{ij}$, i = 1, 2, 3 for each treatment and the residuals have iid double exponential distributions centered on zero as stated in the problem. The Monte Carlo method for testing for the main effects of each treatment is as follows:
 
+1. Generate $Y_{i1},\dots,Y_{in}$ from the model as stated in the problem for each treatment, i = 1, 2, 3.
+2. Calculate the treatment means, $\bar{Y_{i.}} = \frac{\sum{Y_{ij}}}{n_i}$ for each i's. 
+3. Repeat Steps 1 and 2 for 999 times.
+4. For each i, reject $H_0: \mu_i$'s are all equal i.e. there is no treatment effect if the calculated $\bar{Y_{i.}}$ is amongst the smallest or largest 2.5% of the generated $Y_{ij}$'s for each i. 
+
+(b) If we make no assumptions about the residuals, then we will use a permutation test. As such, the steps are as follows:
+
+1. Define the test statistic $\hat{\theta} = \bar{Y_i} - \bar{Y_{i'}}$ for i = 1, 2, 3 and $i \neq i'$. The null hypothesis is then $\hat{\theta} = 0$ and alternative $\hat{\theta} \neq 0$.
+2. For each $i \neq i'$, combine the observed values for $i$ and $i'$ to get $n_i + n_{i'}$ total observations for sampling in Step 3.
+3. Sample $n_i$ points without replacement as group 1, and then remainder is group 2.
+4. Calculate the sample mean for each group and take their difference, $\hat{\theta^*}$.
+5. Repeat steps 2-4 999 times. If $\hat{\theta}$ falls outside the 95% mean differences of the 999 calculated  $\hat{\theta^*}$'s, then we reject the null hypothesis. Otherwise, do not reject.
+6. If we can reject at least one of these differences in means, then we conclude there is a treatment effect. Otherwise, we conclude that no treatment effect is present.  
 
 ##Problem 5
 
