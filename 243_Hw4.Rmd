@@ -3,8 +3,8 @@ title: "STA 243 Homework 4"
 author: "Ariel Sim (50% of work) Samantha Maillie (50% of work)"
 date: "5/14/2018"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +29,7 @@ The clear selection of v is .1 Both .1 and 1 do decent jobs of calculating the t
 (b) $E[c(U)] = E([1+U]) = 1 + 0.5$. The optimal $b \approx 0.001631918$ using the formula provided:
 $$ b = \frac{Cov(\hat{I_{MC}},\hat{\theta_{MC}})}{Var(\hat{\theta_{MC}})}$$
 and calculations for numerator and denominator can be found in the code provided.
-(c) Since we've computed the covariances and variances in (b), we can find $Var(\hat{I}_{CV}) = Var(\hat{I}_{MC}) + b^2Var(\hat{\theta}_{MC}) - 2bCov(\hat{I_{MC}},\hat{\theta_{MC}})$ = 4.162284e-07. The variance of $\hat{I}_{MC} =  \frac{1}{n(n+1)}\sum{[h(U_i)-\hat{I}_{MC}]}$ = 1.310691e-05. The varianc of the estimator is smaller after applying the control variate. 
+(c) Since we've computed the covariances and variances in (b), we can find $Var(\hat{I}_{CV}) = Var(\hat{I}_{MC}) + b^2Var(\hat{\theta}_{MC}) - 2bCov(\hat{I_{MC}},\hat{\theta_{MC}})$ = 4.16e-07. The sample variance of $\hat{I}_{MC}$ = 1.31e-05. The variance of the estimator is smaller after applying the control variate. 
 (d) To get a smaller variance, we can change the mapping of $c = 1+x$ to $c=1+x^{1/2}$. 
 
 ##Problem 4
@@ -40,7 +40,7 @@ and calculations for numerator and denominator can be found in the code provided
 3. Repeat Steps 1 and 2 for 999 times.
 4. For each i, reject $H_0: \mu_i$'s are all equal i.e. there is no treatment effect if the calculated $\bar{Y_{i.}}$ is amongst the smallest or largest 2.5% of the generated $Y_{ij}$'s for each i. 
 
-(b) If we make no assumptions about the residuals, then we will use a permutation test. As such, the steps are as follows:
+(b) If we make no assumptions about the residuals, then we will use Fisher's permutation test. As such, the steps are as follows:
 
 1. Define the test statistic $\hat{\theta} = \bar{Y_i} - \bar{Y_{i'}}$ for i = 1, 2, 3 and $i \neq i'$. The null hypothesis is then $\hat{\theta} = 0$ and alternative $\hat{\theta} \neq 0$.
 2. For each $i \neq i'$, combine the observed values for $i$ and $i'$ to get $n_i + n_{i'}$ total observations for sampling in Step 3.
@@ -51,13 +51,8 @@ and calculations for numerator and denominator can be found in the code provided
 
 ##Problem 5
 
-#a 
-
-See code
-
-#b
-
-These three densities are proportional to $f(x, r, \lambda, p)$. An important thing to note is since we are working with proportionality and not equivalence we can ignore terms not related to the specific variable we are looking at since they will behave like constants. 
+(a) See code
+(b) These three densities are proportional to $f(x, r, \lambda, p)$. An important thing to note is since we are working with proportionality and not equivalence we can ignore terms not related to the specific variable we are looking at since they will behave like constants. 
 
 i. $(\lambda \vert r, r, x) \propto \lambda^{a - 1}e^{-b\lambda} \prod e^{-\lambda r_{i}} (\lambda r_{i})^{x_{i}}$
 
@@ -91,11 +86,7 @@ Remember that all but r acts as a constant here.
 $(r_{i} \vert \lambda, p, x) \propto (\frac{pe^{-\lambda}}{pe^{-\lambda} + (1-p) I_{r_i = 0}})^{\sum r}(1- \frac{pe^{-\lambda}}{pe^{-\lambda} + (1-p) I_{r_i = 0}})^{n - \sum r}$
 
 
-
-
-#c 
-
-The 95% confidence intervals can be constructed using the 2.5 and 97.5 quantiles. It is clear from the plotted histogram that the method is estimating p and $\lambda$ very well. It is not a surprise that both confidence intervals contain what we know to be the true value. The true value of p is .3 with a calculated 95% confidence interval of (.2404, .4921). The true value of $\lambda$ is 2 with a calculated 95% confidence interval of (1.047, 2.116). 
+(c) The 95% confidence intervals can be constructed using the 2.5 and 97.5 quantiles. It is clear from the plotted histogram that the method is estimating p and $\lambda$ very well. It is not a surprise that both confidence intervals contain what we know to be the true value. The true value of p is .3 with a calculated 95% confidence interval of (.2404, .4921). The true value of $\lambda$ is 2 with a calculated 95% confidence interval of (1.047, 2.116). 
 
 
 ##Problem 6
