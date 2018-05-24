@@ -51,7 +51,47 @@ and calculations for numerator and denominator can be found in the code provided
 
 ##Problem 5
 
+#a 
+
+See code
+
 #b
+
+These three densities are proportional to $f(x, r, \lambda, p)$. An important thing to note is since we are working with proportionality and not equivalence we can ignore terms not related to the specific variable we are looking at since they will behave like constants. 
+
+i. $(\lambda \vert r, r, x) \propto \lambda^{a - 1}e^{-b\lambda} \prod e^{-\lambda r_{i}} (\lambda r_{i})^{x_{i}}$
+
+If we expand on the product and rearrange the terms with the goal distribution in mind we see the following: 
+
+$(\lambda \vert r, r, x) \propto \lambda^{a - 1 + \sum x_{i}}e^{-[b + \sum r_{i}] \lambda}$
+
+This is proportional to the gamma distribution $Gamma(a - 1 + \sum x_{i},b + \sum r_{i}$
+
+$(\lambda \vert r, r, x) \propto \frac{(b + \sum r_{i})^{a + \sum x_{i}}\lambda^{a - 1 + \sum x_{i}}e^{-[b + \sum r_{i}] \lambda}}{\Gamma(a  \sum x_{i})}$
+
+ii. Again we can ignore any terms not related to p and then we can rearrange with the goal distribution in mind. 
+
+$(p \vert \lambda, r, x) \propto \prod p^{r_i}(1-p)^{1-r_i}$
+
+$(p \vert \lambda, r, x) \propto  p^{\sum r_i}(1-p)^{n-\sum r_i}$
+
+This is clearly proportional to the beta distribution. 
+
+$(p \vert \lambda, r, x) \propto \frac{p^{\sum r_i}(1-p)^{n-\sum r_i}}{B(1 +\sum r_i, n + 1 - \sum r_i)}$
+
+
+iii. We repeat the same process. 
+
+$(r_{i} \vert \lambda, p, x) \propto \sum e^{-\lambda r_{i}} (\lambda r_{i})^{x_{i}}p^{r_i}(1-p)^{1-r_i}$
+
+$(r_{i} \vert \lambda, p, x) \propto e^{-\lambda \sum r_{i}} p^{\sum r_i}(1-p)^{n-\sum r_i}\prod (r_{i})^{x_{i}}$
+
+Remember that all but r acts as a constant here. 
+
+$(r_{i} \vert \lambda, p, x) \propto (\frac{pe^{-\lambda}}{pe^{-\lambda} + (1-p) I_{r_i = 0}})^{\sum r}(1- \frac{pe^{-\lambda}}{pe^{-\lambda} + (1-p) I_{r_i = 0}})^{n - \sum r}$
+
+
+
 
 #c 
 
