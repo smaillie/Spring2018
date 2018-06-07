@@ -84,15 +84,18 @@ $L' = \frac{n}{\lambda} -\sum x_{i} = 0$ \newline
 $\hat{\lambda}_{MLE} = \frac{n}{\sum x_{i}} = \frac{1}{\bar{X}}$ \newline
 
 
-## b
+## b for part 1 see the picture below.
 $\sqrt{n}(\hat{\lambda}_{n} - \lambda) \rightarrow^{d} N(0,\lambda^2)$
 \newline
+![Proof for 4b.](243_4b.jpg)
 
 $\sqrt{n}(log(\hat{\lambda}_{n}) - log(\lambda)) \rightarrow^{d} N(0,1)$
 \newline
 From the above we know that applying the log function will result in the mean remaining as zero. We also know from the delta method that our new variance will be $(g'(\lambda))^2Var(\lambda)$ where $g(\lambda) = log(\lambda)$ and therefore $g'(\lambda) = \frac{1}{\lambda}$ Putting it all together we get the $g'(\lambda)^2$ and $Var(\lambda)$ cancelling each other out so that we have a variance of 1. 
 
-## c
+## c See the picture below.
+
+![Proof for 4c.](243_4c.jpg)
 
 ## d See the picture below. 
 
