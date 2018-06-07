@@ -54,7 +54,7 @@ plot_estimate_piecewise = function(x,y,break_points,plot_est=FALSE) {
   }
   
   if (plot_est) {
-    plot(x,y,col='blue')
+    plot(x,y,col='black')
     lines(x,y_hat,col='red')
   }
   
@@ -202,7 +202,7 @@ plotCB = function(x,f,B_matrix,conf=0.95,plot_name) {
     y_lower[k] = temp[cl]
   }
   jpeg(paste(plot_name,'.jpeg',sep=''), width=4.25, height=3.25, units="in", res=1000, pointsize=4)
-  plot(x,f,type='l',col='blue',ylim=c(-4,8))
+  plot(x,f,type='l',col='black',ylim=c(-4,8))
   lines(x,y_lower,lty=2,col='red')
   lines(x,y_upper,lty=2,col='red')
   dev.off()

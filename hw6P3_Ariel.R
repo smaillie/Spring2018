@@ -47,12 +47,12 @@ N = 20
 result1 = GenAlgo(x,y1,S,p1,p2,N,MDL)
 result2 = GenAlgo(x,y2,S,p1,p2,N,MDL)
 
-jpeg('a_test1_mdl.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
+jpeg('hw6_3a_test1.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
 y1_hat = plot_estimate_piecewise(x,y1,unlist(result1[[1]]),plot_estimate_piecewiseimation=TRUE)
 
 dev.off()
 
-jpeg('a_test2_mdl.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
+jpeg('hw6_3a_test2.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
 y2_hat = plot_estimate_piecewise(x,y2,unlist(result2[[1]]),plot_estimate_piecewiseimation=TRUE)
 
 dev.off()
