@@ -44,8 +44,8 @@ print(se)
 library(boot)
 theta.boot <-function(dat, ind){
   y <- dat[ind, 1]
-  zz <- dat[ind, 2]
-  mean(y)/mean(z)
+  z <- dat[ind, 2]
+  cor(y, z)
 }
 y <- lsat
 z <-gpa
@@ -85,7 +85,14 @@ boot.t.ci <-function(x, B = 500, R = 100, level = .95, statistic){
 
 
 stat <- function(dat){
-  mean(dat[,1])/mean(dat[,2])
+  cor(dat[,1], dat[,2])
 }
+#note this confidence interval should stop at -1, the code is just
+# a general script from the book. I adjust it so that the correlation
+#coefficient is bounded between -1 and 1
 ci <- boot.t.ci(dat, statistic = stat, B= 2000, R = 200)
+print(ci)
+print("Corrected CI:")
+if(ci[1] <-1){ci[1]= -1}
+if(ci[1] >1){ci[1]= 1}
 print(ci)
