@@ -1,6 +1,7 @@
 # Functions for Homework 6 (and from hw 2)
 
-# (MDL) Minimum Description Length Principle 
+
+# Minimum Description Length Principle 
 MDL = function(x,y,break_points) {
   #x, y: data set
   #break_points: the break points as a vector
@@ -10,32 +11,13 @@ MDL = function(x,y,break_points) {
   ind = c(1,ind,length(x)+1)
   y_hat = c()
   
-  # compute estimated y values
+  # the estimated y values
   for(k in seq(1,B,1)) {
     y_hat = c(y_hat,rep(mean(y[seq(ind[k],ind[k+1]-1,1)]),ind[k+1]-ind[k]))
   }
   
-  # compute MDL value
+  # the MDL value
   z = B*log(n) + sum(log(tail(ind,-1)-head(ind,-1)))/2 + n/2*log(mean((y - y_hat)^2))
-  
-  return(z)
-}
-
-AIC = function(x,y,break_points) {
-  # x, y: data set 
-  # break_points: the break points as a vector
-  n = length(x)
-  B = sum(break_points)+1
-  ind = which(break_points==1)
-  ind = c(1,ind,length(x)+1)
-  y_hat = c()
-  
-  # compute estimated y values
-  for(k in seq(1,B,1)) {
-    y_hat = c(y_hat,rep(mean(y[seq(ind[k],ind[k+1]-1,1)]),ind[k+1]-ind[k]))
-  }
-  
-  z = n*log(mean((y_hat - y)^2)) + log(n)*2*B
   
   return(z)
 }
@@ -143,8 +125,7 @@ GenAlgo = function(x,y,size,p1,p2,N,func) {
 }
 
 
-
-# Perform bootstrap residual estimation once
+# Perform bootstrap residual estimation
 bootstrap_resid = function(x,y_hat,res_hat,seed,S,p1,p2,N,scoreFUN) {
   
   # x: x vector
@@ -163,7 +144,7 @@ bootstrap_resid = function(x,y_hat,res_hat,seed,S,p1,p2,N,scoreFUN) {
 }
 
 
-# Perform bootstrap pairs once
+# Perform bootstrap pairs
 bootstrap_pair = function(x,y,seed,S,p1,p2,N,scoreFUN) {
   set.seed(seed)
   n = length(x)
@@ -206,4 +187,20 @@ plotCB = function(x,f,B_matrix,conf=0.95,plot_name) {
   lines(x,y_lower,lty=2,col='red')
   lines(x,y_upper,lty=2,col='red')
   dev.off()
+}
+
+truefunction1 = function(x) {
+  t = c(0.1, 0.13, 0.15, 0.23, 0.25,
+        0.4, 0.44, 0.65, 0.76, 0.78, 0.81)
+  h = c(4, -5, 3, -4, 5, -4.2, 2.1, 4.3, -3.1, 2.1, -4.2)
+  temp = 0
+  for(i in 1:11) {
+    temp = temp + h[i]/2 * (1 + sign(x - t[i]))
+  }
+  return(temp)
+}
+
+truefunction2 = function(x) {
+  temp = (4*x-2)+2*exp(-16*(4*x-2)^2)
+  return(temp)
 }

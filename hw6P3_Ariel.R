@@ -4,27 +4,8 @@
 source('hw6functions.R')
 
 # Generate simulated data
-truefunction1 = function(x) {
-  t = c(0.1, 0.13, 0.15, 0.23, 0.25,
-        0.4, 0.44, 0.65, 0.76, 0.78, 0.81)
-  h = c(4, -5, 3, -4, 5, -4.2, 2.1, 4.3, -3.1, 2.1, -4.2)
-  temp = 0
-  for(i in 1:11) {
-    temp = temp + h[i]/2 * (1 + sign(x - t[i]))
-  }
-  return(temp)
-}
-
-truefunction2 = function(x) {
-  temp = (4*x-2)+2*exp(-16*(4*x-2)^2)
-  return(temp)
-}
-
 # Setup
-n = 512
-x = (0:(n-1))/n
-f1 = truefunction1(x)
-f2 = truefunction2(x)
+n = 512 ;x = (0:(n-1))/n ;f1 = truefunction1(x) ;f2 = truefunction2(x)
 
 set.seed(10)
 y1 = f1 + rnorm(f1)/3
@@ -32,66 +13,64 @@ y2 = f2 + rnorm(n, mean=0, sd=sqrt(integrate(function(z) {truefunction2(z)^2},lo
 
 # a
 # From HW2 setup:
-S = 400 
-p1 = 0.95
-p2 = 0.08
-N = 20
+S = 400 ;p1 = 0.95; p2 = 0.08 ;N = 20
 
 result1 = GenAlgo(x,y1,S,p1,p2,N,MDL)
 result2 = GenAlgo(x,y2,S,p1,p2,N,MDL)
 
+# Save the image to pdf
 jpeg('hw6_3a_test1.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
 y1_hat = plot_estimate_piecewise(x,y1,unlist(result1[[1]]),plot_estimate_piecewiseimation=TRUE)
-
 dev.off()
-
 jpeg('hw6_3a_test2.jpg', width=4.25, height=3.25, units="in", res=1000, pointsize=4)
 y2_hat = plot_estimate_piecewise(x,y2,unlist(result2[[1]]),plot_estimate_piecewiseimation=TRUE)
-
 dev.off()
 
 # b
 
+
+# set up parallel computing; load packages
+library(tictoc)
+library('foreach')
+library('parallel')
+library('iterators')
+library('doParallel')
+
 t = 2000 # of simulations
-nc = 20 # cores
+nc = 20 # cores for parallel computing 
 
 # Test function 1
 # Bootstrap Residuals
-res1_hat = y1 - y1_hat
-seed1 = 11
+resid1_hat = y1 - y1_hat
 registerDoParallel(nc)
-
-res1_B = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_resid')) %dopar% bootstrap_resid(x,y1_hat,res1_hat,seed1+k,S,p1,p2,N,MDL)
-
-plotCB(x,f1,res1_B,conf=0.95,'bootstrap residuals for test function 1')
+tic('bootstrap resid test1')
+resid1 = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_resid')) %dopar% bootstrap_resid(x,y1_hat,resid1_hat,11+k,S,p1,p2,N,MDL)
+toc()
+plotCB(x,f1,resid1,conf=0.95,'Test function 1 bootstrap residuals')
 
 # Bootstrap Pairs
-seed2 = 12
 registerDoParallel(nc)
-tic('bootstrap pairs for test1')
-pair1_B = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_pair')) %dopar% bootstrap_pair(x,y1,seed2+k,S,p1,p2,N,MDL)
+tic('bootstrap pairs test1')
+pair1 = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_pair')) %dopar% bootstrap_pair(x,y1,12+k,S,p1,p2,N,MDL)
 toc()
-plotCB(x,f1,pair1_B,conf=0.95,'bootstrap pairs for test function 1')
+plotCB(x,f1,pair1,conf=0.95,'Test function 1 bootstrap pairs')
 
 # Test function 2
 # Bootstrap Residuals
-res2_hat = y2 - y2_hat
+resid2_hat = y2 - y2_hat
 
-seed3 = 13
 registerDoParallel(nc)
-tic('bootstrap residuals for test1')
-res2_B = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_resid')) %dopar% bootstrap_resid(x,y2_hat,res2_hat,seed3+k,S,p1,p2,N,MDL)
+tic('bootstrap resid test2')
+resid2 = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_resid')) %dopar% bootstrap_resid(x,y2_hat,resid2_hat,13+k,S,p1,p2,N,MDL)
 toc()
-plotCB(x,f2,res2_B,conf=0.95,'bootstrap residuals for test function 2')
+plotCB(x,f2,resid2,conf=0.95,'Test function 2 bootstrap residuals')
 
 # Bootstrap Pairs
-seed4 = 14
 registerDoParallel(nc)
-tic('bootstrap pairs for test1')
-pair2_B = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_pair')) %dopar% bootstrap_pair(x,y2,seed4+k,S,p1,p2,N,MDL)
+tic('bootstrap pairs test2')
+pair2 = foreach(k=1:t,.combine="rbind",.multicombine=TRUE,.export=c('bootstrap_pair')) %dopar% bootstrap_pair(x,y2,14+k,S,p1,p2,N,MDL)
 toc()
-plotCB(x,f2,pair2_B,conf=0.95,'bootstrap pairs for test function 2')
-
+plotCB(x,f2,pair2,conf=0.95,'Test function 2 bootstrap pairs')
 
 ## save
-save(x,y1,y2,f1,f2,res1_B,res2_B,pair1_B,pair2_B, file='hw6_3.RData')
+save(x,y1,y2,f1,f2,resid1,resid2,pair1,pair2, file='hw6_3.RData')
