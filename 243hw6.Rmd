@@ -51,24 +51,24 @@ We get a consistantly excellent estimation of this using parametric bootstraping
 
 # Problem 3
 ## a
-Because the true function (test function 1) in HW#2 is a piecewise constant, using a genetic algorithm on this test function would provide more reasonable regression curve estimates than applying it on the 2nd test function provided in this problem. This is because the 2nd function is smooth, so approximating using a piecewise function will produce satistfactory but not very good results. Plots of both functions can be found attached below. 
+Because the true function (test function 1) in HW#2 is a piecewise constant, using a genetic algorithm on this test function would provide more reasonable regression curve estimates than applying it on the 2nd test function provided in this problem. This is because the 2nd function is smooth, so approximating using a piecewise function will produce satistfactory but not very good results. Plots of both functions can be found attached below under Figure "Problem 3a -". 
 
-![Plot for test function 1](testfun1.jpg)
+![Problem 3a - Plot for test function 1](testfun1.jpg)
 
-![Plot for test function 2](testfun2.jpg)
+![Problem 3a - Plot for test function 2](testfun2.jpg)
 
 ## b
-The confidence bands for both functions are found using bootstrapping residuals and pairs. The resulting plots are shown below.
+The confidence bands for both functions are found using bootstrapping residuals and pairs. The resulting plots are shown below under Figure "Problem 3b -".
 
-![Plot of Test Function 1 from bootstrapped residuals](bootstrapresid_fun1.jpg)
-
-
-![Plot of Test Function 1 from bootstrapped pairs](bootstrappair_fun1.jpg)
-
-![Plot of Test Function 2 from bootstrapped residuals](bootstrapresid_fun2.jpg)
+![Problem 3b - Plot of Test Function 1 from bootstrapped residuals](bootstrapresid_fun1.jpg)
 
 
-![Plot of Test Function 2 from bootstrapped pairs](bootstrappair_fun2.jpg)
+![Problem 3b - Plot of Test Function 1 from bootstrapped pairs](bootstrappair_fun1.jpg)
+
+![Problem 3b - Plot of Test Function 2 from bootstrapped residuals](bootstrapresid_fun2.jpg)
+
+
+![Problem 3b - Plot of Test Function 2 from bootstrapped pairs](bootstrappair_fun2.jpg)
 
 From the plots, we noticed that bootstrapping residuals' confidence bands are closer to the estimated piecewise function. This is not surprising since this method only resamples the estimated residuals and not the jump points.
 
