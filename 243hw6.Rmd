@@ -50,7 +50,28 @@ We get a consistantly excellent estimation of this using parametric bootstraping
 
 
 # Problem 3
+## a
+Because the true function (test function 1) in HW#2 is a piecewise constant, using a genetic algorithm on this test function would provide more reasonable regression curve estimates than applying it on the 2nd test function provided in this problem. This is because the 2nd function is smooth, so approximating using a piecewise function will not produce good results. Plots of both functions can be found attached below. 
 
+## NOTE TO SELF, add plots once the algorithm is done.
+
+## b
+The confidence bands for both functions are found using bootstrapping residuals and pairs. The resulting plots are shown below.
+
+## NOTE TO SELF, add plots once the algorithm is done!!!
+
+From the plots, we noticed that bootstrapping residuals' confidence bands are closer to the estimated piecewise function. This is not surprising since this method only resamples the estimated residuals and not the jump points.
+
+As such, we see that the confidence bands obtained from the bootstrapping pairs are more volatile and in some sense wider than the bootstrap residuals, especially around the jump points. Perhaps this method is not as stable since there is a possibility of resampling the same pair.
+
+As for the test function from HW#2, the true function is a smooth function whereas the approximation is piecewise, so the confidence bands themselves will not contain the true function either, thus a poorer approxmation.
+
+## c
+The steps are as follows:
+1. Create 2000 bootstrap samples
+2. Find the best chromosome using the genetic algorithm for each of the bootstrapped samples
+3. Count the $n_i$'s that are selected as jump points for each $i$
+4. For confidence level $1-\alpha$, take the smallest set of points where the proportion of the sum of their jump points counts are at least $1-\alpha$.
 
 # Problem 4
 
