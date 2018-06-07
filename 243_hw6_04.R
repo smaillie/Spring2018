@@ -1,10 +1,14 @@
 #Samantha Maillie 243 Homework 6 Problem 4e
 
-#BCa 
 library(boot)
+library(invgamma)
 B <- 5000
 n <- 50
 lam <- numeric(B)
+lamCL <- numeric(B)
+lamCU <- numeric(B)
+lamDL <- numeric(B)
+lamDU <- numeric(B)
 lambda = 1
 x = rexp(n, lambda)
 lambda = 1/mean(x)
@@ -13,10 +17,24 @@ lambda = 1/mean(x)
 for(b in 1:B){
   i <-sample(1:n, size = n, replace = TRUE)
   lam[b] <- 1/mean(x[i])
+  lamCL[b]<-1/mean(x[i])*exp((-1.96/sqrt(n)))
+  lamCU[b]<-1/mean(x[i])*exp((1.96/sqrt(n)))
+  gL <- pinvgamma(.025, n, rate = 1, scale = 1/rate, lower.tail = TRUE,
+                 log.p = FALSE)
+  lamDL[b]<- 1/mean(x[i])*gL
+  gU <- pinvgamma(.975, n, rate = 1, scale = 1/rate, lower.tail = TRUE,
+                  log.p = FALSE)
+  lamDU[b]<- 1/mean(x[i])*gU
 }
 
-print(mean(lam))
+partC_CI <-cbind(lamCL, lamCU)
+print(partC_CI)
+
+partD_CI <-cbind(lamDL, lamDU)
+print(partD_CI)
 hist(lam, prob = TRUE, main = 'Histogram for lambda')
+
+
 
 
 boot.bca<- function( x, th0, th, stat, conf = .95 ){
