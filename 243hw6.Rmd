@@ -113,5 +113,8 @@ From the above we know that applying the log function will result in the mean re
 
 ## e
 
+Our confidence intervals all are very close to the true lambda of 1. We would expect to see that the asympotic interval to be the tighest bound of the three. We do find that the confidence interval from part d is the tighest bound interval we generated. 
+
+
 ## References
 1.Rizzo, Maria L. Statistical Computing with R. Chapman & Hall/CRC, 2017.
