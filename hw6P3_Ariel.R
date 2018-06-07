@@ -30,17 +30,10 @@ set.seed(10)
 y1 = f1 + rnorm(f1)/3
 y2 = f2 + rnorm(n, mean=0, sd=sqrt(integrate(function(z) {truefunction2(z)^2},lower=0,upper=1)$value)/5 )
 
-# plot(x,y)
-# lines(x,f)
-# plot(x,f1,type='l')
-# plot(x,f2,type='l')
-# points(x,y2)
-
-
 # a
-# Parameters in Homework 2
-S = 400 # 300 for AIC, 400 for MDL
-p1 = 0.95 # both 0.90 and 0.95 work
+# From HW2 setup:
+S = 400 
+p1 = 0.95
 p2 = 0.08
 N = 20
 
@@ -101,4 +94,4 @@ plotCB(x,f2,pair2_B,conf=0.95,'bootstrap pairs for test function 2')
 
 
 ## save
-save(x,y1,y2,f1,f2,res1_B,res2_B,pair1_B,pair2_B, file='hw6P3.RData')
+save(x,y1,y2,f1,f2,res1_B,res2_B,pair1_B,pair2_B, file='hw6_3.RData')
